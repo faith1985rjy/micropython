@@ -165,6 +165,8 @@
 #define MICROPY_PY_THREAD           (0)
 #endif /* MICROPYTHON_USING_THREAD */
 
+#define MICROPY_PY_SUMMERGIFT       (1)
+
 #ifdef MICROPYTHON_USING_USELECT
 #define MICROPY_PY_USELECT          (1)
 #endif
@@ -309,11 +311,18 @@ extern const struct _mp_obj_module_t mp_module_uselect;
 extern const struct _mp_obj_module_t mp_module_usocket;
 extern const struct _mp_obj_module_t mp_module_io;
 extern const struct _mp_obj_fun_builtin_fixed_t machine_soft_reset_obj;
+extern const struct _mp_obj_module_t mp_module_summergift;
 
 #if MICROPY_PY_RTTHREAD
 #define RTTHREAD_PORT_BUILTIN_MODULES { MP_ROM_QSTR(MP_QSTR_rtthread), MP_ROM_PTR(&mp_module_rtthread) },
 #else
 #define RTTHREAD_PORT_BUILTIN_MODULES
+#endif /* MICROPY_PY_RTTHREAD */
+
+#if MICROPY_PY_SUMMERGIFT
+#define SUMMERGIFT_PORT_BUILTIN_MODULES { MP_ROM_QSTR(MP_QSTR_summergift), MP_ROM_PTR(&mp_module_summergift) },
+#else
+#define SUMMERGIFT_PORT_BUILTIN_MODULES
 #endif /* MICROPY_PY_RTTHREAD */
 
 #if MICROPY_PY_MODUOS
@@ -434,6 +443,7 @@ extern const struct _mp_obj_fun_builtin_fixed_t machine_soft_reset_obj;
     MODUOS_PORT_BUILTIN_MODULES \
     SOCKET_PORT_BUILTIN_MODULES \
     MODUTIME_PORT_BUILTIN_MODULES \
+    SUMMERGIFT_PORT_BUILTIN_MODULES \
 
 #define MICROPY_PORT_BUILTIN_MODULE_WEAK_LINKS \
     MODUTIME_PORT_BUILTIN_MODULE_WEAK_LINKS \
